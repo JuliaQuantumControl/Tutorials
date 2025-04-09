@@ -54,12 +54,15 @@ jobs:
                     Export_baked_state=false,
                     # more parameters can go here
                   )'
-            - name: Inject top navigation bar
+            - name: Inject top navigation bar and metadata
               run: |
-                INSERT_CODE='<link href="https://juliaquantumcontrol.github.io/QuantumControl.jl/dev/assets/topbar/topbar.css" rel="stylesheet" type="text/css"/><script src="https://juliaquantumcontrol.github.io/QuantumControl.jl/dev/assets/topbar/topbar.js"></script>'
+                INSERT_CODE_HEAD='<link href="https://juliaquantumcontrol.github.io/QuantumControl.jl/dev/assets/topbar/topbar.css" rel="stylesheet" type="text/css"/><script src="https://juliaquantumcontrol.github.io/QuantumControl.jl/dev/assets/topbar/topbar.js"></script>'
+                INSERT_META_DESCRIPTION='<meta name="description" content="Tutorials for the JuliaQuantumControl Organization."/>'
+                # The specific text of the above meta tag is required for topbar.js to properly recognized that a page belongs in the "Tutorials" tab
                 for file in *.html; do
-                  # Use sed to insert the code before </head>
-                  sed -i "/<\/head>/i $INSERT_CODE" "$file"
+                  # Use sed with /i to insert the code before the specified location
+                  sed -i "/<\/head>/i $INSERT_CODE_HEAD" "$file"
+                  sed -i "/<meta property='og:type' content='article'>/i $INSERT_META_DESCRIPTION" "$file"
                 done
             - name: Deploy to gh-pages
               uses: JamesIves/github-pages-deploy-action@releases/v4
