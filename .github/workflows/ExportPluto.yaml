@@ -56,7 +56,7 @@ jobs:
                   )'
             - name: Inject top navigation bar and metadata
               run: |
-                INSERT_CODE_HEAD='<link href="https://juliaquantumcontrol.github.io/QuantumControl.jl/dev/assets/topbar/topbar.css" rel="stylesheet" type="text/css"/><script src="https://juliaquantumcontrol.github.io/QuantumControl.jl/dev/assets/topbar/topbar.js"></script>'
+                INSERT_CODE_HEAD='<link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"><link href="https://juliaquantumcontrol.github.io/QuantumControl.jl/dev/assets/topbar/topbar.css" rel="stylesheet" type="text/css"/><script src="https://juliaquantumcontrol.github.io/QuantumControl.jl/dev/assets/topbar/topbar.js"></script>'
                 INSERT_META_DESCRIPTION='<meta name="description" content="Tutorials for the JuliaQuantumControl Organization."/>'
                 # The specific text of the above meta tag is required for topbar.js to properly recognized that a page belongs in the "Tutorials" tab
                 for file in *.html; do
