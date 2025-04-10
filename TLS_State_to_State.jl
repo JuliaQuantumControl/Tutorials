@@ -29,6 +29,7 @@ begin
 	    foreground_color_legend = nothing,
 	    background_color_legend = RGBA(1, 1, 1, 0.8)
 	)
+	TableOfContents()
 end
 
 # ╔═╡ 017e2537-5315-4431-a4fd-9d514efb8d7c
@@ -253,7 +254,7 @@ begin
 		_ϵ_0 = parse(Float64, _guess_amplitude_str)
 	catch
 	end
-	local _ϵ(t) = _ϵ_0 * QuantumControl.Shapes.flattop(t, T=5, t_rise=0.3, func=:blackman);
+	_ϵ(t) = _ϵ_0 * QuantumControl.Shapes.flattop(t, T=5, t_rise=0.3, func=:blackman);
 	local _ω = 1.0
 	try
 		_ω = parse(Float64, _ω_str)
@@ -268,14 +269,11 @@ begin
 end
 
 # ╔═╡ 18e5972c-a439-470e-bf3c-18636a2d09df
-    let
-	    content = md"""
-		With the default ω = 1.0, for an amplitude of 3.0, the error is below 5%.
+details("Solution", md"""
+With the default ω = 1.0, for an amplitude of 3.0, the error is below 5%.
 
-		For a resonant field (ω = 0.0), setting |ϵ(t)| = 1/3 produces an error of zero.
-		"""
-	    HTML("<details><summary>Solution</summary>$(html(content))</details>")
-    end
+For a resonant field (ω = 0.0), setting |ϵ(t)| = 1/3 produces an error of zero.
+""")
 
 # ╔═╡ 4c3bc003-bcb2-43f1-b9dc-2170d5f6e9a4
 md"""
@@ -393,7 +391,7 @@ QuantumPropagators = "7bf12567-5742-4b91-a078-644e72a65fc1"
 GRAPE = "~0.7.5"
 Krotov = "~0.7.2"
 Plots = "~1.40.11"
-PlutoUI = "~0.7.23"
+PlutoUI = "~0.7.62"
 QuantumControl = "~0.11.1"
 QuantumPropagators = "~0.8.3"
 """
@@ -404,7 +402,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.11.4"
 manifest_format = "2.0"
-project_hash = "9134bafb930192eeeb10f50e47d70d1f92bd4aa6"
+project_hash = "1795e60d95a8f6ab8d6c06c759eb8af62172cd7b"
 
 [[deps.AbstractPlutoDingetjes]]
 deps = ["Pkg"]
@@ -461,19 +459,15 @@ version = "3.29.0"
 
 [[deps.ColorTypes]]
 deps = ["FixedPointNumbers", "Random"]
-git-tree-sha1 = "67e11ee83a43eb71ddc950302c53bf33f0690dfe"
+git-tree-sha1 = "b10d0b65641d57b8b4d5e234446582de5047050d"
 uuid = "3da002f7-5984-5a60-b8a6-cbb66c0b333f"
-version = "0.12.1"
-weakdeps = ["StyledStrings"]
-
-    [deps.ColorTypes.extensions]
-    StyledStringsExt = "StyledStrings"
+version = "0.11.5"
 
 [[deps.ColorVectorSpace]]
 deps = ["ColorTypes", "FixedPointNumbers", "LinearAlgebra", "Requires", "Statistics", "TensorCore"]
-git-tree-sha1 = "8b3b6f87ce8f65a2b4f857528fd8d70086cd72b1"
+git-tree-sha1 = "a1f44953f2382ebb937d60dafbe2deea4bd23249"
 uuid = "c3611d14-8923-5661-9e6a-0046d554d3a4"
-version = "0.11.0"
+version = "0.10.0"
 weakdeps = ["SpecialFunctions"]
 
     [deps.ColorVectorSpace.extensions]
@@ -704,9 +698,9 @@ version = "8.5.0+0"
 
 [[deps.Hyperscript]]
 deps = ["Test"]
-git-tree-sha1 = "8d511d5b81240fc8e6802386302675bdf47737b9"
+git-tree-sha1 = "179267cfa5e712760cd43dcae385d7ea90cc25a4"
 uuid = "47d2ed2b-36de-50cf-bf87-49c2cf4b8b91"
-version = "0.0.4"
+version = "0.0.5"
 
 [[deps.HypertextLiteral]]
 deps = ["Tricks"]
@@ -931,6 +925,11 @@ git-tree-sha1 = "f02b56007b064fbfddb4c9cd60161b6dd0f40df3"
 uuid = "e6f89c97-d47a-5376-807f-9c37f3926c36"
 version = "1.1.0"
 
+[[deps.MIMEs]]
+git-tree-sha1 = "c64d943587f7187e751162b3b84445bbbd79f691"
+uuid = "6c6e2e6c-3030-632d-7369-2d6c69616d65"
+version = "1.1.0"
+
 [[deps.MacroTools]]
 git-tree-sha1 = "72aebe0b5051e5143a079a4685a46da330a40472"
 uuid = "1914dd2f-81c6-5fcd-8719-6d5c9610ff09"
@@ -1102,10 +1101,10 @@ version = "1.40.11"
     Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
 
 [[deps.PlutoUI]]
-deps = ["AbstractPlutoDingetjes", "Base64", "Dates", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "JSON", "Logging", "Markdown", "Random", "Reexport", "UUIDs"]
-git-tree-sha1 = "5152abbdab6488d5eec6a01029ca6697dff4ec8f"
+deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "FixedPointNumbers", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "JSON", "Logging", "MIMEs", "Markdown", "Random", "Reexport", "URIs", "UUIDs"]
+git-tree-sha1 = "d3de2694b52a01ce61a036f18ea9c0f61c4a9230"
 uuid = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
-version = "0.7.23"
+version = "0.7.62"
 
 [[deps.PrecompileTools]]
 deps = ["Preferences"]
